@@ -128,7 +128,7 @@ public class RazorpayDelegate implements ActivityResultListener {
             public void onReceiveUpiSupportedApps(List<ApplicationDetails> list) {
                 HashMap<Object, Object> hMap = new HashMap<>();
                 for (int i=0;i<list.size();i++) {
-                    hMap.put(list.get(i).getPackageName(),list.get(i).getAppName());
+                    hMap.put(list.get(i).getPackageName(),list.get(i).getAppLogoUrl());
                 }
                 pendingResult.success(hMap);
             }
