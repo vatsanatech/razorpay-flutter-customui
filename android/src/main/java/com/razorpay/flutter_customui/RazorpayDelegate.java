@@ -111,12 +111,22 @@ public class RazorpayDelegate implements ActivityResultListener {
             @Override
             public void onPaymentMethodsReceived(String s) {
                 HashMap<String, Object> hMapData = new Gson().fromJson(s, HashMap.class);
-                pendingResult.success(hMapData);
+                try {
+                    pendingResult.success(hMapData);
+                }
+                catch (Exception ignored){
+                }
+                //pendingResult.success(hMapData);
             }
 
             @Override
             public void onError(String s) {
-                pendingResult.error(s, "", null);
+         
+                try {
+                    pendingResult.error(s, "", null);
+                }
+                catch (Exception ignored){
+                }
             }
         });
     }
