@@ -140,7 +140,11 @@ public class RazorpayDelegate implements ActivityResultListener {
                 for (int i=0;i<list.size();i++) {
                     hMap.put(list.get(i).getPackageName(),list.get(i).getAppLogoUrl());
                 }
-                pendingResult.success(hMap);
+                 try {
+                    pendingResult.success(hMap);
+                }
+                catch (Exception ignored){
+                }
             }
         });
     }
@@ -150,24 +154,44 @@ public class RazorpayDelegate implements ActivityResultListener {
         razorpay.getSubscriptionAmount(value, new SubscriptionAmountCallback() {
             @Override
             public void onSubscriptionAmountReceived(long l) {
-                pendingResult.success(l);
+                 try {
+                    pendingResult.success(l);
+                }
+                catch (Exception ignored){
+                }
             }
 
             @Override
             public void onError(String s) {
-                pendingResult.error(s, "", null);
+               
+                 try {
+                     pendingResult.error(s, "", null);
+                }
+                catch (Exception ignored){
+                }
             }
         });
     }
 
     void getWalletLogoUrl(String value, Result result) {
         this.pendingResult = result;
-        pendingResult.success(razorpay.getWalletLogoUrl(value));
+        
+        try {
+                    pendingResult.success(razorpay.getWalletLogoUrl(value));
+                }
+                catch (Exception ignored){
+                }
+        
     }
 
     void isValidCardNumber(String value, Result result) {
         this.pendingResult = result;
-        pendingResult.success(razorpay.isValidCardNumber(value));
+        
+        try {
+                    pendingResult.success(razorpay.isValidCardNumber(value));
+                }
+                catch (Exception ignored){
+                }
     }
 
     void isValidVpa(String value, Result result) {
@@ -188,7 +212,12 @@ public class RazorpayDelegate implements ActivityResultListener {
 
     private void sendReply(HashMap<Object, Object> data) {
         if (pendingResult != null) {
-            pendingResult.success(data);
+             try {
+                   pendingResult.success(data);
+                }
+                catch (Exception ignored){
+                }
+            
             pendingReply = null;
         } else {
             pendingReply = data;
@@ -196,7 +225,12 @@ public class RazorpayDelegate implements ActivityResultListener {
     }
 
     public void resync(Result result) {
-        result.success(pendingReply);
+        
+        try {
+                    result.success(pendingReply);
+                }
+                catch (Exception ignored){
+                }
         pendingReply = null;
     }
 
