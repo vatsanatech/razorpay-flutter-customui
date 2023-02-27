@@ -121,7 +121,12 @@ public class RazorpayDelegate implements ActivityResultListener {
 
             @Override
             public void onError(String s) {
-                pendingResult.error(s, "", null);
+         
+                try {
+                    pendingResult.error(s, "", null);
+                }
+                catch (Exception ignored){
+                }
             }
         });
     }
