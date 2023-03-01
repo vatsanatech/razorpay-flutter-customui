@@ -73,11 +73,16 @@ public class RazorpayDelegate implements ActivityResultListener {
     }
 
     void submit(final JSONObject payload, Result result) {
-        this.pendingResult = result;
-        Intent intent = new Intent(activity, RazorpayPaymentActivity.class);
-        intent.putExtra(Constants.OPTIONS, payload.toString());
-        intent.putExtra("FRAMEWORK", "flutter");
-        activity.startActivityForResult(intent, RazorpayPaymentActivity.RZP_REQUEST_CODE);
+       
+        try {
+             this.pendingResult = result;
+            Intent intent = new Intent(activity, RazorpayPaymentActivity.class);
+            intent.putExtra(Constants.OPTIONS, payload.toString());
+            intent.putExtra("FRAMEWORK", "flutter");
+            activity.startActivityForResult(intent, RazorpayPaymentActivity.RZP_REQUEST_CODE);
+            }
+            catch (Exception ignored){
+            }
     }
 
     void callNativeIntent(String value, Result result) {
